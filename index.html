@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITIO: BIENVENIDO AL RINCÓN DE LO QUE FUE Y NO PUDO SER - AUTOR: TAIGA</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: url('img/hoja.webp');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: darken;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            position: relative;
+            overflow-y: auto;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        header,
+        footer {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(51, 51, 51, 0.8);
+            color: #fff;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .humo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('img/humo.png') repeat;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .header-text {
+            font-size: 36px;
+            font-family: 'Dancing Script', cursive;
+            color: #8B4513;
+            text-shadow:
+                0 0 5px rgba(255, 215, 0, 0.7),
+                0 0 10px rgba(255, 215, 0, 0.5),
+                0 0 15px rgba(255, 215, 0, 0.3);
+            opacity: 0;
+            animation: slideIn 1s ease forwards, float 3s ease-in-out infinite;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .pdf-gallery {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 30px 20px;
+            max-width: 1200px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pdf-item {
+            text-align: center;
+            cursor: pointer;
+            width: 250px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: rgba(30, 30, 30, 0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            position: relative;
+            z-index: 2;
+            animation: bounceIn 0.5s ease forwards;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            font-family: 'Garamond', serif;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .pdf-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .pdf-item:hover {
+            transform: rotate(5deg) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            background-color: rgba(60, 60, 60, 0.9);
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+        }
+
+        .pdf-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        .pdf-item h3 {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #fff;
+            opacity: 0;
+            animation: fadeInText 0.5s forwards;
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+            z-index: 1000;
+        }
+
+        .modal iframe {
+            width: 80%;
+            height: 90%;
+            border: none;
+            object-fit: contain;
+            background-color: transparent;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 10;
+        }
+
+        #prevButton {
+            left: 5%;
+        }
+
+        #nextButton {
+            right: 5%;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .logo {
+            position: absolute;
+            top: 40px;
+            left: 3rem;
+            width: 10rem;
+            height: auto;
+            z-index: 3;
+            animation: floatLogo 3s ease-in-out infinite;
+        }
+
+        @keyframes floatLogo {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .logo {
+                position: static;
+                display: block;
+                width: 50px;
+                height: auto;
+                margin: 0 auto;
+                animation: floatLogo 3s ease-in-out infinite;
+            }
+
+            .header-text {
+                font-size: 20px;
+                text-align: center;
+                margin: 10px 0;
+            }
+
+            header {
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Tus estilos originales aquí */
+
+        /* Estilos para la barra interactiva (hamburguesa) */
+        .navbar {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(51, 51, 51, 0.8);
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            z-index: 10;
+        }
+
+        .hamburger {
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+            border: none;
+            background: none;
+        }
+
+        .dropdown {
+            display: none;
+            flex-direction: column;
+            background-color: rgba(51, 51, 51, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .dropdown a {
+            color: white;
+            text-decoration: none;
+            margin: 5px 0;
+            font-size: 18px;
+        }
+
+        .dropdown a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilos para la barra de búsqueda medieval */
+        .filter-bar {
+            margin: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            background: rgba(139, 69, 19, 0.8);
+            /* Fondo marrón oscuro */
+            padding: 10px;
+            border: 3px solid #8B4513;
+            /* Borde marrón oscuro */
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            /* Sombra elegante */
+            font-family: 'Garamond', serif;
+            /* Fuente medieval */
+        }
+
+        .filter-bar .search-bar {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #D4AF37;
+            /* Borde dorado */
+            border-radius: 5px;
+            outline: none;
+            background: rgba(245, 245, 220, 0.8);
+            /* Fondo beige */
+            font-family: 'Garamond', serif;
+            transition: all 0.3s ease;
+            width: 150px;
+            /* Tamaño inicial */
+        }
+
+        /* Cuando está enfocada, se expande */
+        .filter-bar .search-bar:focus {
+            width: 300px;
+            /* Tamaño expandido */
+            border-color: #FFD700;
+            /* Dorado brillante */
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            /* Sombra dorada */
+            background: rgba(255, 248, 220, 1);
+            /* Fondo más claro */
+        }
+
+        /* Estilo del select */
+        .filter-bar select {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #D4AF37;
+            /* Borde dorado */
+            border-radius: 5px;
+            outline: none;
+            background: rgba(245, 245, 220, 0.8);
+            /* Fondo beige */
+            font-family: 'Garamond', serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-bar select:hover,
+        .filter-bar select:focus {
+            border-color: #FFD700;
+            /* Dorado brillante */
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            /* Sombra dorada */
+            background: rgba(255, 248, 220, 1);
+            /* Fondo más claro */
+        }
+
+        /* Estilos adicionales para las opciones */
+        .filter-bar select option {
+            background: rgba(245, 245, 220, 0.8);
+            /* Fondo beige */
+            color: #8B4513;
+            /* Texto marrón oscuro */
+            font-family: 'Garamond', serif;
+            font-size: 16px;
+        }
+
+
+
+        /* Estilo general para un toque antiguo */
+        body {
+            font-family: 'Garamond', serif;
+        }
+
+        /* Barra de búsqueda y filtro con estilo antiguo */
+        .filter-bar {
+            margin: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            background: rgba(233, 214, 107, 0.8);
+            /* Fondo pergamino */
+            padding: 10px;
+            border: 2px solid #B8860B;
+            /* Borde dorado oscuro */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            /* Sombra suave */
+        }
+
+        .filter-bar .search-bar {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #8B4513;
+            /* Borde marrón oscuro */
+            border-radius: 3px;
+            outline: none;
+            background: rgba(245, 245, 220, 0.9);
+            /* Fondo beige antiguo */
+            transition: all 0.2s ease;
+            width: 140px;
+            /* Tamaño inicial */
+            font-family: 'Garamond', serif;
+            color: #4B2E2E;
+            /* Texto marrón oscuro */
+        }
+
+        /* Al enfocarse, el borde se hace más visible */
+        .filter-bar .search-bar:focus {
+            width: 260px;
+            /* Tamaño expandido */
+            border-color: #8B4513;
+            /* Resalta el borde */
+            background: rgba(245, 245, 220, 1);
+            /* Fondo más claro */
+        }
+
+        /* Estilo del select */
+        .filter-bar select {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #8B4513;
+            /* Borde marrón oscuro */
+            border-radius: 3px;
+            outline: none;
+            background: rgba(245, 245, 220, 0.9);
+            /* Fondo beige */
+            font-family: 'Garamond', serif;
+            color: #4B2E2E;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-bar select:hover,
+        .filter-bar select:focus {
+            border-color: #8B4513;
+            /* Borde más visible */
+            background: rgba(245, 245, 220, 1);
+            /* Fondo más claro */
+        }
+
+        /* Opciones con estilo antiguo */
+        .filter-bar select option {
+            background: rgba(245, 245, 220, 0.9);
+            /* Fondo beige */
+            color: #4B2E2E;
+            /* Texto marrón oscuro */
+            font-family: 'Garamond', serif;
+        }
+
+        /* Estilo para la barra dinámica (hamburguesa) */
+        .navbar {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(233, 214, 107, 0.8);
+            /* Fondo pergamino */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border: 2px solid #B8860B;
+            /* Borde dorado oscuro */
+        }
+
+        .hamburger {
+            font-size: 24px;
+            cursor: pointer;
+            color: #4B2E2E;
+            /* Marrón oscuro */
+            background: none;
+            border: none;
+            font-family: 'Garamond', serif;
+        }
+
+        .dropdown {
+            display: none;
+            flex-direction: column;
+            background: rgba(233, 214, 107, 0.9);
+            /* Fondo pergamino */
+            padding: 10px;
+            border-radius: 5px;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            /* Sombra suave */
+            border: 2px solid #B8860B;
+            /* Borde dorado oscuro */
+        }
+
+        .dropdown a {
+            color: #4B2E2E;
+            /* Marrón oscuro */
+            text-decoration: none;
+            margin: 5px 0;
+            font-size: 16px;
+            font-family: 'Garamond', serif;
+            transition: color 0.2s ease;
+        }
+
+        .dropdown a:hover {
+            color: #8B4513;
+            /* Marrón más claro */
+        }
+
+
+
+        /* ESTILO DE LA BARRA Y LA */
+
+
+
+
+        /* Barra de búsqueda y filtro con estilo antiguo */
+        .filter-bar {
+            margin: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            background: linear-gradient(145deg, rgba(233, 214, 107, 0.9), rgba(233, 214, 107, 0.7));
+            /* Fondo pergamino degradado */
+            padding: 15px;
+            border: 3px double #B8860B;
+            /* Borde doble dorado oscuro */
+            border-radius: 10px;
+            /* Bordes redondeados */
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.3);
+            /* Sombra interior y exterior */
+            font-family: 'Garamond', serif;
+        }
+
+        /* Campo de búsqueda */
+        .filter-bar .search-bar {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #8B4513;
+            /* Borde marrón oscuro */
+            border-radius: 5px;
+            outline: none;
+            background: linear-gradient(to bottom, rgba(245, 245, 220, 0.9), rgba(233, 214, 107, 0.8));
+            /* Fondo degradado */
+            transition: all 0.3s ease;
+            width: 150px;
+            /* Tamaño inicial */
+            font-family: 'Garamond', serif;
+            color: #4B2E2E;
+            /* Texto marrón oscuro */
+        }
+
+        /* Al enfocarse */
+        .filter-bar .search-bar:focus {
+            width: 280px;
+            /* Tamaño expandido */
+            border-color: #8B4513;
+            /* Borde más visible */
+            background: rgba(245, 245, 220, 1);
+            /* Fondo más claro */
+            box-shadow: 0 0 15px rgba(139, 69, 19, 0.7);
+            /* Brillo cálido */
+        }
+
+        /* Select con estilo */
+        .filter-bar select {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #8B4513;
+            /* Borde marrón oscuro */
+            border-radius: 5px;
+            outline: none;
+            background: linear-gradient(to bottom, rgba(245, 245, 220, 0.9), rgba(233, 214, 107, 0.8));
+            /* Fondo degradado */
+            font-family: 'Garamond', serif;
+            color: #4B2E2E;
+            /* Texto marrón oscuro */
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-bar select:hover,
+        .filter-bar select:focus {
+            border-color: #B8860B;
+            /* Borde dorado oscuro */
+            background: rgba(245, 245, 220, 1);
+            /* Fondo más claro */
+            box-shadow: 0 0 15px rgba(139, 69, 19, 0.7);
+            /* Brillo cálido */
+        }
+
+        /* Opciones dentro del select */
+        .filter-bar select option {
+            background: rgba(245, 245, 220, 0.9);
+            /* Fondo beige */
+            color: #4B2E2E;
+            /* Texto marrón oscuro */
+            font-family: 'Garamond', serif;
+        }
+
+        /* Barra dinámica (hamburguesa) */
+        .navbar {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(145deg, rgba(233, 214, 107, 0.9), rgba(233, 214, 107, 0.7));
+            /* Fondo degradado */
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            /* Sombra pronunciada */
+            border: 3px double #B8860B;
+            /* Borde doble dorado */
+            z-index: 10;
+        }
+
+        .hamburger {
+            font-size: 24px;
+            cursor: pointer;
+            color: #4B2E2E;
+            /* Marrón oscuro */
+            background: none;
+            border: none;
+            font-family: 'Garamond', serif;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        /* Hover en el icono de hamburguesa */
+        .hamburger:hover {
+            transform: scale(1.2);
+            /* Agrandamiento suave */
+            color: #8B4513;
+            /* Marrón cálido */
+        }
+
+        /* Menú desplegable */
+        .dropdown {
+            display: none;
+            flex-direction: column;
+            background: linear-gradient(145deg, rgba(233, 214, 107, 0.9), rgba(233, 214, 107, 0.8));
+            /* Fondo degradado */
+            padding: 10px;
+            border-radius: 10px;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            /* Sombra pronunciada */
+            border: 2px solid #B8860B;
+            /* Borde dorado oscuro */
+        }
+
+        /* Links dentro del menú */
+        .dropdown a {
+            color: #4B2E2E;
+            /* Marrón oscuro */
+            text-decoration: none;
+            margin: 8px 0;
+            font-size: 18px;
+            font-family: 'Garamond', serif;
+            transition: color 0.2s ease;
+        }
+
+        /* Hover en los enlaces del menú */
+        .dropdown a:hover {
+            color: #8B4513;
+            /* Marrón cálido */
+            text-decoration: underline;
+        }
+
+        /* Animación sutil */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Barra dinámica (hamburguesa) -->
+    <div class="navbar">
+        <button class="hamburger" onclick="toggleDropdown()">☰</button>
+        <div class="dropdown" id="dropdownMenu">
+            <a href="index.html">Libros</a>
+            <a href="poemas.html">Poemas</a>
+        </div>
+    </div>
+
+    <header>
+        <img src="img/LOGO.png" alt="Logo" class="logo">
+        <div class="humo"></div>
+        <h1 class="header-text">BIENVENIDO AL RINCÓN DE LO QUE FUE Y NO PUDO SER</h1>
+        <p class="header-text">COMIENZA LA AVENTURA ESCOGE</p>
+    </header>
+
+    <!-- Barra de búsqueda y filtro -->
+    <div class="filter-bar">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Buscar por nombre..."
+            onfocus="expandSearchBar()" onblur="shrinkSearchBar()" onkeyup="searchBooks()">
+        <select id="genreFilter" onchange="filterBooks()">
+            <option value="all">Todos</option>
+        </select>
+    </div>
+
+    <!-- Galería de libros -->
+    <section class="pdf-gallery" id="bookGallery">
+        <div class="pdf-item" data-genre="fantasia,romance" data-title="LO QUE FUE Y NO PUDO SER - Capítulos 1 y 2"
+            onclick="openPDF(0)">
+            <img src="img/imgoficial.jpeg" alt="LO QUE FUE Y NO PUDO SER - Capítulos 1 y 2">
+            <h3 id="pdf-title-0">LO QUE FUE Y NO PUDO SER - Capítulos 1 y 2</h3>
+            <p class="genre">Fantasía, Romance</p>
+        </div>
+        <div class="pdf-item" data-genre="fantasia,romance" data-title="LO QUE FUE Y NO PUDO SER - Capítulos 3 y 4"
+            onclick="openPDF(1)">
+            <img src="img/imgoficial.jpeg" alt="LO QUE FUE Y NO PUDO SER - Capítulos 3 y 4">
+            <h3 id="pdf-title-1">LO QUE FUE Y NO PUDO SER - Capítulos 3 y 4</h3>
+            <p class="genre">Fantasía, Romance</p>
+        </div>
+        <div class="pdf-item" data-genre="recuerdos,psicologico" data-title="EL DIARIO DE UN SUICIDA" onclick="openPDF(2)">
+            <img src="img/EDDUS.webp" alt="EL DIARIO DE UN SUICIDA">
+            <h3 id="pdf-title-2">EL DIARIO DE UN SUICIDA CAPITULOS 1-2</h3>
+            <p class="genre">Recuerdos, Psicológico</p>
+        </div>
+    </section>
+
+    <div id="pdfModal" class="modal">
+        <button id="prevButton" class="nav-button" onclick="navigatePDF(-1)">←</button>
+        <iframe id="pdfIframe" src=""></iframe>
+        <button id="nextButton" class="nav-button" onclick="navigatePDF(1)">→</button>
+        <span class="close" onclick="closePDF()">&times;</span>
+    </div>
+
+    <footer>
+        <div class="humo"></div>
+        <p class="header-text">&copy; 2024 Todos los derechos reservados | TAIGA</p>
+    </footer>
+
+    <script>
+        const pdfList = [
+            { url: "doc/LO QUE FUE Y NO PUDO SER 1 y 2.pdf", title: "LO QUE FUE Y NO PUDO SER - Capítulos 1 y 2", genre: "fantasia,romance", read: false },
+            { url: "doc/LO QUE FUE Y NO PUDO SER 3-4.pdf", title: "LO QUE FUE Y NO PUDO SER - Capítulos 3 y 4", genre: "fantasia,romance", read: false },
+            { url: "doc/EDDUSICIDA 1 Y 2.pdf", title: "EL DIARIO DE UN SUICIDA", genre: "recuerdos,psicologico", read: false }
+        ];
+    
+        let currentIndex = -1;
+    
+        function toggleDropdown() {
+            const dropdown = document.getElementById("dropdownMenu");
+            dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+        }
+    
+        function expandSearchBar() {
+            const searchBar = document.getElementById("searchInput");
+            searchBar.style.width = "300px";
+            searchBar.style.borderColor = "#8B4513";
+            searchBar.style.boxShadow = "0 0 10px rgba(139, 69, 19, 0.5)";
+        }
+    
+        function shrinkSearchBar() {
+            const searchBar = document.getElementById("searchInput");
+            searchBar.style.width = "150px";
+            searchBar.style.borderColor = "#ccc";
+            searchBar.style.boxShadow = "none";
+        }
+    
+        function filterBooks() {
+            const genre = document.getElementById("genreFilter").value;
+            const books = document.querySelectorAll(".pdf-item");
+    
+            books.forEach(book => {
+                const genres = book.dataset.genre.split(",");
+                if (genre === "all" || genres.includes(genre)) {
+                    book.style.display = "block";
+                } else {
+                    book.style.display = "none";
+                }
+            });
+        }
+    
+        function searchBooks() {
+            const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+            const books = document.querySelectorAll(".pdf-item");
+    
+            books.forEach(book => {
+                const title = book.dataset.title.toLowerCase();
+                book.style.display = title.includes(searchTerm) ? "block" : "none";
+            });
+        }
+    
+        function updateGenreFilter() {
+            const books = document.querySelectorAll(".pdf-item");
+            const genres = new Set();
+    
+            books.forEach(book => {
+                const bookGenres = book.dataset.genre.split(",");
+                bookGenres.forEach(genre => genres.add(genre.trim()));
+            });
+    
+            const genreFilter = document.getElementById("genreFilter");
+            genreFilter.innerHTML = '<option value="all">Todos</option>';
+    
+            genres.forEach(genre => {
+                const option = document.createElement("option");
+                option.value = genre;
+                option.textContent = genre.charAt(0).toUpperCase() + genre.slice(1);
+                genreFilter.appendChild(option);
+            });
+        }
+    
+        function openPDF(index) {
+            currentIndex = index; // Actualizamos el índice actual
+            const modal = document.getElementById("pdfModal");
+            const iframe = document.getElementById("pdfIframe");
+            iframe.src = pdfList[index].url;
+            modal.style.display = "flex";
+    
+            // Marcar como leído
+            pdfList[index].read = true;
+            saveReadStatus();
+            updateReadStatus();
+        }
+    
+        function closePDF() {
+            const modal = document.getElementById("pdfModal");
+            const iframe = document.getElementById("pdfIframe");
+            iframe.src = "";
+            modal.style.display = "none";
+        }
+    
+        function navigatePDF(direction) {
+            const newIndex = currentIndex + direction;
+            if (newIndex >= 0 && newIndex < pdfList.length) {
+                openPDF(newIndex);
+            }
+        }
+    
+        function saveReadStatus() {
+            const readStatus = pdfList.map(pdf => pdf.read);
+            localStorage.setItem("pdfReadStatus", JSON.stringify(readStatus));
+        }
+    
+        function loadReadStatus() {
+            const savedStatus = localStorage.getItem("pdfReadStatus");
+            if (savedStatus) {
+                const readStatus = JSON.parse(savedStatus);
+                pdfList.forEach((pdf, index) => {
+                    pdf.read = readStatus[index];
+                });
+            }
+            updateReadStatus();
+        }
+    
+        function updateReadStatus() {
+            pdfList.forEach((pdf, index) => {
+                const titleElement = document.getElementById(`pdf-title-${index}`);
+                if (pdf.read) {
+                    titleElement.style.color = "green"; // Cambiar color si está leído
+                } else {
+                    titleElement.style.color = ""; // Restaurar color predeterminado
+                }
+            });
+        }
+    
+        // Cargar estado de lectura al iniciar la página
+        loadReadStatus();
+    
+        // Actualizar el filtro de géneros al iniciar
+        updateGenreFilter();
+    </script>
+    
+</body>
+
+</html>

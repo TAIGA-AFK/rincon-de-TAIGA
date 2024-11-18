@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITIO: BIENVENIDO AL RINCÓN DE LO QUE FUE Y NO PUDO SER - AUTOR: TAIGA</title>
+    <style>
+        body {
+
+
+
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: url('img/POE.webp');
+            /* Cambiado a un fondo más sombrío */
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
+            /* Intensifica el fondo oscuro */
+            background-color: rgba(20, 20, 20, 0.9);
+            /* Fondo aún más oscuro */
+            color: #e0e0e0;
+            /* Color del texto ligeramente grisáceo */
+            position: relative;
+            overflow-y: auto;
+            animation: fadeIn 1s ease;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        header,
+        footer {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(30, 30, 30, 0.95);
+            /* Fondo más oscuro para header y footer */
+            color: #c0c0c0;
+            /* Color del texto ajustado a gris claro */
+            width: 100%;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            /* Sombra roja sutil */
+            overflow: hidden;
+        }
+
+        .humo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('img/humo-denso.png') repeat;
+            /* Humo más denso */
+            opacity: 0.7;
+            /* Aumentamos la opacidad para mayor dramatismo */
+            z-index: -1;
+        }
+
+        /* 1ER CAMBIO */
+
+        .header-text {
+            font-size: 36px;
+            font-family: 'Dancing Script', cursive;
+            /* Conservado para elegancia */
+            color: #bf0000;
+            /* Cambiado a un rojo oscuro y profundo */
+            text-shadow:
+                0 0 10px rgba(191, 0, 0, 0.8),
+                /* Sombra roja más intensa */
+                0 0 20px rgba(191, 0, 0, 0.6),
+                0 0 30px rgba(191, 0, 0, 0.4);
+            opacity: 0;
+            animation: slideIn 1s ease forwards, float 3s ease-in-out infinite;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+                /* Flotación más sutil */
+            }
+        }
+
+        .pdf-gallery {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 30px 20px;
+            max-width: 1200px;
+            position: relative;
+            z-index: 2;
+            background: rgba(20, 20, 20, 0.9);
+            /* Fondo oscuro para la galería */
+            border: 2px solid rgba(255, 0, 0, 0.6);
+            /* Borde rojo tenue */
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+            /* Sombra roja */
+            border-radius: 10px;
+        }
+
+        /* 2DO CAMBIO */
+
+        .pdf-item {
+            text-align: center;
+            cursor: pointer;
+            width: 250px;
+            border: 2px solid rgba(191, 0, 0, 0.8);
+            /* Borde rojo oscuro */
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: rgba(20, 20, 20, 0.8);
+            /* Fondo más oscuro */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            position: relative;
+            z-index: 2;
+            animation: bounceIn 0.5s ease forwards;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+            /* Sombra roja más intensa */
+            font-family: 'Garamond', serif;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.1);
+                /* Aumento más pronunciado */
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .pdf-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+            /* Sombra más oscura */
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .pdf-item:hover {
+            transform: rotate(2deg) scale(1.1);
+            /* Rotación más sutil */
+            box-shadow: 0 8px 20px rgba(191, 0, 0, 0.6);
+            /* Sombra roja intensa */
+            background-color: rgba(40, 40, 40, 0.95);
+            /* Fondo aún más oscuro al pasar */
+            filter: drop-shadow(0 0 20px rgba(191, 0, 0, 0.7));
+            /* Resplandor rojo tenue */
+        }
+
+        .pdf-item:hover img {
+            transform: scale(1.15);
+            /* Zoom más marcado */
+            filter: brightness(0.8) saturate(1.2);
+            /* Más oscuro y saturado */
+        }
+
+        .pdf-item h3 {
+            font-size: 18px;
+            margin-top: 10px;
+            color: rgba(191, 0, 0, 0.9);
+            /* Texto rojo oscuro */
+            opacity: 0;
+            animation: fadeInText 0.5s forwards;
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* 3ERO CAMBIO */
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            /* Fondo más oscuro */
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+            z-index: 1000;
+            box-shadow: inset 0 0 50px rgba(191, 0, 0, 0.8);
+            /* Efecto de sombra roja desde los bordes */
+        }
+
+        .modal iframe {
+            width: 80%;
+            height: 90%;
+            border: 2px solid rgba(191, 0, 0, 0.8);
+            /* Borde rojo oscuro */
+            object-fit: contain;
+            background-color: rgba(30, 30, 30, 0.9);
+            /* Fondo oscuro para el marco */
+            box-shadow: 0 0 15px rgba(191, 0, 0, 0.7);
+            /* Sombra roja alrededor */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .modal iframe:hover {
+            transform: scale(1.02);
+            /* Ligero zoom al pasar el ratón */
+            box-shadow: 0 0 25px rgba(191, 0, 0, 0.9);
+            /* Sombra más intensa */
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(30, 30, 30, 0.9);
+            /* Fondo más oscuro */
+            color: rgba(191, 0, 0, 0.9);
+            /* Texto rojo oscuro */
+            border: 2px solid rgba(191, 0, 0, 0.8);
+            /* Borde rojo oscuro */
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 5px;
+            z-index: 10;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(60, 60, 60, 1);
+            /* Fondo más brillante */
+            transform: scale(1.1);
+            /* Agrandamiento suave */
+            box-shadow: 0 0 20px rgba(191, 0, 0, 0.9);
+            /* Resplandor rojo */
+        }
+
+        #prevButton {
+            left: 5%;
+        }
+
+        #nextButton {
+            right: 5%;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: rgba(191, 0, 0, 1);
+            /* Rojo brillante */
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 10;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .close:hover {
+            color: rgba(255, 0, 0, 1);
+            /* Rojo más brillante */
+            transform: scale(1.2);
+            /* Zoom al pasar el ratón */
+        }
+
+        .logo {
+            position: absolute;
+            top: 40px;
+            left: 3rem;
+            width: 10rem;
+            height: auto;
+            z-index: 3;
+            animation: floatLogo 3s ease-in-out infinite;
+            filter: grayscale(100%) brightness(0.8);
+            /* Hacer el logo más sombrío */
+            transition: filter 0.3s ease;
+        }
+
+        .logo:hover {
+            filter: grayscale(50%) brightness(1);
+            /* Reducir el efecto sombrío al pasar */
+        }
+
+        @keyframes floatLogo {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+
+
+        /* 4TO CAMBIO */
+
+        @media screen and (max-width: 768px) {
+            .logo {
+                position: static;
+                display: block;
+                width: 60px;
+                /* Un poco más grande para resaltar */
+                height: auto;
+                margin: 0 auto;
+                animation: floatLogo 3s ease-in-out infinite;
+                filter: grayscale(100%) brightness(0.6);
+                /* Efecto más sombrío en dispositivos pequeños */
+                transition: filter 0.3s ease;
+            }
+
+            .logo:hover {
+                filter: grayscale(80%) brightness(0.8);
+                /* Menos sombrío al pasar el ratón */
+            }
+
+            .header-text {
+                font-size: 18px;
+                /* Texto más pequeño para adaptarse a pantallas pequeñas */
+                text-align: center;
+                margin: 10px 0;
+                color: rgba(255, 0, 0, 0.8);
+                /* Rojo oscuro para acentuar el tono sombrío */
+                text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+                /* Efecto de resplandor rojo */
+            }
+
+            header {
+                padding: 15px;
+                /* Más espacio para que sea más consistente */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: rgba(30, 30, 30, 0.8);
+                /* Fondo más oscuro para un ambiente sombrío */
+                border-bottom: 2px solid rgba(191, 0, 0, 0.8);
+                /* Línea roja oscura en la parte inferior */
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+                /* Sombra más fuerte */
+            }
+        }
+
+
+
+
+        /* 5TO CAMBIO  */
+
+
+
+
+
+
+
+
+        /* Tus estilos originales aquí */
+
+        /* Estilos para la barra interactiva (hamburguesa) */
+        .navbar {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(30, 30, 30, 0.9);
+            /* Fondo más oscuro */
+            padding: 12px 25px;
+            /* Ajuste del espacio para un diseño más robusto */
+            border-radius: 8px;
+            /* Bordes más redondeados para mayor contraste */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8), 0 0 5px rgba(255, 0, 0, 0.5);
+            /* Sombra más marcada con un toque rojo */
+            z-index: 10;
+            border: 1px solid rgba(255, 0, 0, 0.5);
+            /* Línea roja tenue alrededor */
+        }
+
+        .hamburger {
+            font-size: 26px;
+            /* Ligera ampliación para destacar más */
+            cursor: pointer;
+            color: rgba(255, 0, 0, 0.8);
+            /* Rojo oscuro para seguir el tono sombrío */
+            border: none;
+            background: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            /* Suavizar la interacción */
+        }
+
+        .hamburger:hover {
+            color: rgba(255, 50, 50, 1);
+            /* Más vibrante al interactuar */
+            transform: scale(1.1);
+            /* Ligero aumento al pasar el ratón */
+        }
+
+        .dropdown {
+            display: none;
+            flex-direction: column;
+            background-color: rgba(20, 20, 20, 0.95);
+            /* Fondo negro casi opaco */
+            padding: 12px;
+            border-radius: 8px;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.9), 0 0 5px rgba(255, 0, 0, 0.6);
+            /* Más profundidad y rojo tenue */
+            border: 1px solid rgba(255, 0, 0, 0.7);
+            /* Borde rojo oscuro */
+        }
+
+        .dropdown a {
+            color: rgba(200, 200, 200, 0.9);
+            /* Gris claro para mayor contraste */
+            text-decoration: none;
+            margin: 8px 0;
+            font-size: 18px;
+            font-family: 'Garamond', serif;
+            /* Fuente más acorde al tono sombrío */
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            /* Interacción más fluida */
+        }
+
+        .dropdown a:hover {
+            color: rgba(255, 0, 0, 0.9);
+            /* Rojo intenso al pasar el ratón */
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
+            /* Resplandor rojo */
+            text-decoration: underline;
+        }
+
+
+
+        /* 7TO CAMBIO */
+
+
+
+        /* Estilos para la barra de búsqueda sombría */
+        .filter-bar {
+            margin: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            background: rgba(30, 30, 30, 0.9);
+            /* Fondo negro oscuro */
+            padding: 12px;
+            border: 3px solid rgba(255, 0, 0, 0.8);
+            /* Borde rojo intenso */
+            border-radius: 12px;
+            /* Bordes más redondeados */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 0, 0, 0.5);
+            /* Sombra más profunda */
+            font-family: 'Garamond', serif;
+            /* Mantener la fuente elegante */
+            color: rgba(255, 255, 255, 0.9);
+            /* Texto blanco suave */
+        }
+
+        .filter-bar .search-bar {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid rgba(255, 0, 0, 0.7);
+            /* Borde rojo oscuro */
+            border-radius: 8px;
+            /* Bordes redondeados */
+            outline: none;
+            background: rgba(50, 50, 50, 0.9);
+            /* Fondo gris oscuro */
+            color: rgba(255, 255, 255, 0.9);
+            /* Texto blanco */
+            font-family: 'Garamond', serif;
+            transition: all 0.3s ease;
+            width: 150px;
+            /* Tamaño inicial */
+        }
+
+        .filter-bar .search-bar:focus {
+            width: 300px;
+            /* Tamaño expandido */
+            border-color: rgba(255, 0, 0, 1);
+            /* Rojo vibrante */
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+            /* Resplandor rojo */
+            background: rgba(60, 60, 60, 1);
+            /* Fondo más oscuro */
+            color: rgba(255, 255, 255, 1);
+            /* Texto más brillante */
+        }
+
+        /* Estilo del select */
+        .filter-bar select {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid rgba(255, 0, 0, 0.7);
+            /* Borde rojo oscuro */
+            border-radius: 8px;
+            outline: none;
+            background: rgba(50, 50, 50, 0.9);
+            /* Fondo gris oscuro */
+            color: rgba(255, 255, 255, 0.9);
+            /* Texto blanco */
+            font-family: 'Garamond', serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-bar select:hover,
+        .filter-bar select:focus {
+            border-color: rgba(255, 0, 0, 1);
+            /* Rojo vibrante */
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+            /* Resplandor rojo */
+            background: rgba(60, 60, 60, 1);
+            /* Fondo más oscuro */
+            color: rgba(255, 255, 255, 1);
+            /* Texto más brillante */
+        }
+
+        /* Estilos para las opciones */
+        .filter-bar select option {
+            background: rgba(40, 40, 40, 0.9);
+            /* Fondo gris oscuro */
+            color: rgba(200, 200, 200, 1);
+            /* Texto gris claro */
+            font-family: 'Garamond', serif;
+            font-size: 16px;
+        }
+
+
+
+        /* 8VO CAMBIO*/
+
+
+
+
+
+        /* Estilo general para un toque antiguo */
+        /* Ajustes generales del cuerpo */
+        body {
+            font-family: 'Garamond', serif;
+            background-color: rgba(20, 20, 20, 0.9);
+            /* Fondo oscuro */
+            color: rgba(220, 220, 220, 1);
+            /* Texto gris claro */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Barra de búsqueda y filtro con estilo sombrío */
+        .filter-bar {
+            margin: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            background: rgba(40, 40, 40, 0.9);
+            /* Fondo negro grisáceo */
+            padding: 12px;
+            border: 3px solid rgba(255, 0, 0, 0.8);
+            /* Borde rojo intenso */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 0, 0, 0.5);
+            /* Sombra más profunda */
+        }
+
+        /* Campo de búsqueda */
+        .filter-bar .search-bar {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid rgba(255, 0, 0, 0.7);
+            /* Borde rojo oscuro */
+            border-radius: 5px;
+            outline: none;
+            background: rgba(60, 60, 60, 0.9);
+            /* Fondo gris oscuro */
+            color: rgba(255, 255, 255, 0.9);
+            /* Texto blanco */
+            font-family: 'Garamond', serif;
+            transition: all 0.3s ease;
+            width: 150px;
+            /* Tamaño inicial */
+        }
+
+        /* Efecto al enfocar */
+        .filter-bar .search-bar:focus {
+            width: 260px;
+            /* Tamaño expandido */
+            border-color: rgba(255, 0, 0, 1);
+            /* Rojo vibrante */
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+            /* Resplandor rojo */
+            background: rgba(80, 80, 80, 1);
+            /* Fondo más oscuro */
+        }
+
+        /* Select con estilo sombrío */
+        .filter-bar select {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid rgba(255, 0, 0, 0.7);
+            /* Borde rojo oscuro */
+            border-radius: 5px;
+            outline: none;
+            background: rgba(60, 60, 60, 0.9);
+            /* Fondo gris oscuro */
+            color: rgba(255, 255, 255, 0.9);
+            /* Texto blanco */
+            font-family: 'Garamond', serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Efecto al interactuar */
+        .filter-bar select:hover,
+        .filter-bar select:focus {
+            border-color: rgba(255, 0, 0, 1);
+            /* Rojo vibrante */
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+            /* Resplandor rojo */
+            background: rgba(80, 80, 80, 1);
+            /* Fondo más oscuro */
+        }
+
+        /* Opciones dentro del select */
+        .filter-bar select option {
+            background: rgba(40, 40, 40, 0.9);
+            /* Fondo negro grisáceo */
+            color: rgba(220, 220, 220, 1);
+            /* Texto gris claro */
+            font-family: 'Garamond', serif;
+        }
+
+        /* Barra dinámica estilo sombrío */
+        .navbar {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(40, 40, 40, 0.9);
+            /* Fondo oscuro */
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            /* Sombra suave */
+            border: 3px solid rgba(255, 0, 0, 0.8);
+            /* Borde rojo intenso */
+        }
+
+        /* Botón hamburguesa */
+        .hamburger {
+            font-size: 24px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.9);
+            /* Texto blanco */
+            background: none;
+            border: none;
+            font-family: 'Garamond', serif;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        /* Hover en el botón */
+        .hamburger:hover {
+            transform: scale(1.2);
+            color: rgba(255, 0, 0, 1);
+            /* Rojo vibrante */
+        }
+
+        /* Menú desplegable */
+        .dropdown {
+            display: none;
+            flex-direction: column;
+            background: rgba(50, 50, 50, 0.9);
+            /* Fondo gris oscuro */
+            padding: 10px;
+            border-radius: 10px;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            /* Sombra profunda */
+            border: 2px solid rgba(255, 0, 0, 0.8);
+            /* Borde rojo intenso */
+        }
+
+        /* Enlaces dentro del menú */
+        .dropdown a {
+            color: rgba(255, 255, 255, 0.9);
+            /* Texto blanco */
+            text-decoration: none;
+            margin: 5px 0;
+            font-size: 16px;
+            font-family: 'Garamond', serif;
+            transition: color 0.2s ease;
+        }
+
+        /* Hover en los enlaces */
+        .dropdown a:hover {
+            color: rgba(255, 0, 0, 1);
+            /* Rojo vibrante */
+        }
+
+
+        /* 9NO CAMBIO */
+
+
+
+
+
+        /* ESTILO DE LA BARRA Y LA */
+        /* Barra de búsqueda y filtro con estilo antiguo */
+        /* Ajustes para la barra de búsqueda y filtro con un tono más oscuro */
+        .filter-bar {
+            margin: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(30, 30, 30, 0.9));
+            /* Fondo oscuro degradado */
+            padding: 15px;
+            border: 3px double rgba(255, 0, 0, 0.7);
+            /* Borde doble rojo oscuro */
+            border-radius: 10px;
+            /* Bordes redondeados */
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 0, 0, 0.5);
+            /* Sombra interior y exterior */
+            font-family: 'Garamond', serif;
+        }
+
+        /* Campo de búsqueda */
+        .filter-bar .search-bar {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid rgba(255, 0, 0, 0.7);
+            /* Borde rojo oscuro */
+            border-radius: 5px;
+            outline: none;
+            background: linear-gradient(to bottom, rgba(60, 60, 60, 0.9), rgba(40, 40, 40, 0.8));
+            /* Fondo degradado oscuro */
+            transition: all 0.3s ease;
+            width: 150px;
+            /* Tamaño inicial */
+            font-family: 'Garamond', serif;
+            color: rgba(255, 255, 255, 0.9);
+            /* Texto blanco */
+        }
+
+        /* Efecto al enfocar */
+        .filter-bar .search-bar:focus {
+            width: 280px;
+            /* Tamaño expandido */
+            border-color: rgba(255, 0, 0, 1);
+            /* Rojo intenso */
+            background: rgba(30, 30, 30, 1);
+            /* Fondo negro */
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+            /* Resplandor rojo */
+        }
+
+        /* Select con estilo sombrío */
+        .filter-bar select {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid rgba(255, 0, 0, 0.7);
+            /* Borde rojo oscuro */
+            border-radius: 5px;
+            outline: none;
+            background: linear-gradient(to bottom, rgba(60, 60, 60, 0.9), rgba(40, 40, 40, 0.8));
+            /* Fondo degradado oscuro */
+            font-family: 'Garamond', serif;
+            color: rgba(255, 255, 255, 0.9);
+            /* Texto blanco */
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Efecto hover y focus */
+        .filter-bar select:hover,
+        .filter-bar select:focus {
+            border-color: rgba(255, 0, 0, 1);
+            /* Rojo intenso */
+            background: rgba(30, 30, 30, 1);
+            /* Fondo negro */
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+            /* Resplandor rojo */
+        }
+
+        /* Opciones dentro del select */
+        .filter-bar select option {
+            background: rgba(40, 40, 40, 0.9);
+            /* Fondo negro grisáceo */
+            color: rgba(255, 255, 255, 0.9);
+            /* Texto blanco */
+            font-family: 'Garamond', serif;
+        }
+
+        /* Barra dinámica (hamburguesa) */
+        .navbar {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(30, 30, 30, 0.8));
+            /* Fondo degradado oscuro */
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+            /* Sombra pronunciada */
+            border: 3px double rgba(255, 0, 0, 0.8);
+            /* Borde doble rojo oscuro */
+            z-index: 10;
+        }
+
+        /* Botón hamburguesa */
+        .hamburger {
+            font-size: 24px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.9);
+            /* Texto blanco */
+            background: none;
+            border: none;
+            font-family: 'Garamond', serif;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        /* Hover en el botón */
+        .hamburger:hover {
+            transform: scale(1.2);
+            /* Agrandamiento suave */
+            color: rgba(255, 0, 0, 1);
+            /* Rojo intenso */
+        }
+
+        /* Menú desplegable */
+        .dropdown {
+            display: none;
+            flex-direction: column;
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(30, 30, 30, 0.8));
+            /* Fondo degradado oscuro */
+            padding: 10px;
+            border-radius: 10px;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+            /* Sombra profunda */
+            border: 2px solid rgba(255, 0, 0, 0.8);
+            /* Borde rojo oscuro */
+        }
+
+        /* Enlaces dentro del menú */
+        .dropdown a {
+            color: rgba(255, 255, 255, 0.9);
+            /* Texto blanco */
+            text-decoration: none;
+            margin: 8px 0;
+            font-size: 18px;
+            font-family: 'Garamond', serif;
+            transition: color 0.2s ease;
+        }
+
+        /* Hover en los enlaces */
+        .dropdown a:hover {
+            color: rgba(255, 0, 0, 1);
+            /* Rojo intenso */
+            text-decoration: underline;
+        }
+
+        /* Animación sutil */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ULTIMO CAMBIO*/
+    </style>
+
+</head>
+
+<body>
+    <!-- Barra dinámica (hamburguesa) -->
+    <div class="navbar">
+        <button class="hamburger" onclick="toggleDropdown()">☰</button>
+        <div class="dropdown" id="dropdownMenu">
+            <a href="index.html">Libros</a>
+        </div>
+    </div>
+
+    <header>
+        <img src="img/LOGO.png" alt="Logo" class="logo">
+        <div class="humo"></div>
+        <h1 class="header-text">BIENVENIDO AL RINCÓN DE LOS SENTIMIENTOS</h1>
+        <p class="header-text">COMIENZA LA AVENTURA, ESCOGE TU POEMA</p>
+    </header>
+
+    <!-- Barra de búsqueda y filtro -->
+    <div class="filter-bar">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Buscar por nombre..."
+            onfocus="expandSearchBar()" onblur="shrinkSearchBar()" onkeyup="searchBooks()">
+        <select id="genreFilter" onchange="filterBooks()">
+            <option value="all">Todos</option>
+        </select>
+    </div>
+
+    <!-- Galería de libros -->
+    <section class="pdf-gallery" id="bookGallery">
+        <div class="pdf-item" data-genre="romance" data-title="LO QUE FUE Y NO PUDO SER - Capítulos 1 y 2"
+            onclick="openPDF(0)">
+            <img src="img/imgoficial.jpeg" alt="LO QUE FUE Y NO PUDO SER - Capítulos 1 y 2">
+            <h3 id="pdf-title-0">LO QUE FUE Y NO PUDO SER - Capítulos 1 y 2</h3>
+            <p class="genre">Romance</p>
+        </div>
+        <div class="pdf-item" data-genre="fantasia" data-title="LO QUE FUE Y NO PUDO SER - Capítulos 3 y 4"
+            onclick="openPDF(1)">
+            <img src="img/imgoficial.jpeg" alt="LO QUE FUE Y NO PUDO SER - Capítulos 3 y 4">
+            <h3 id="pdf-title-1">LO QUE FUE Y NO PUDO SER - Capítulos 3 y 4</h3>
+            <p class="genre">Fantasía</p>
+        </div>
+        <div class="pdf-item" data-genre="historia" data-title="NO LO SÉ" onclick="openPDF(2)">
+            <img src="img/imgoficial.jpeg" alt="NO LO SÉ">
+            <h3 id="pdf-title-2">NO LO SÉ</h3>
+            <p class="genre">Historia</p>
+        </div>
+    </section>
+
+    <div id="pdfModal" class="modal">
+        <button id="prevButton" class="nav-button" onclick="navigatePDF(-1)">←</button>
+        <iframe id="pdfIframe" src=""></iframe>
+        <button id="nextButton" class="nav-button" onclick="navigatePDF(1)">→</button>
+        <span class="close" onclick="closePDF()">&times;</span>
+    </div>
+
+    <footer>
+        <div class="humo"></div>
+        <p class="header-text">&copy; 2024 Todos los derechos reservados | TAIGA</p>
+    </footer>
+
+    <script>
+        const pdfList = [
+            { url: "doc/LO QUE FUE Y NO PUDO SER 1 y 2.pdf", title: "LO QUE FUE Y NO PUDO SER - Capítulos 1 y 2", genre: "fantasia,romance", read: false },
+            { url: "doc/LO QUE FUE Y NO PUDO SER 3-4.pdf", title: "LO QUE FUE Y NO PUDO SER - Capítulos 3 y 4", genre: "fantasia,romance", read: false },
+            { url: "", title: "EL DIARIO DE UN SUICIDA", genre: "recuerdos,psicologico", read: false }
+        ];
+    
+        let currentIndex = -1;
+    
+        function toggleDropdown() {
+            const dropdown = document.getElementById("dropdownMenu");
+            dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+        }
+    
+        function expandSearchBar() {
+            const searchBar = document.getElementById("searchInput");
+            searchBar.style.width = "300px";
+            searchBar.style.borderColor = "#8B4513";
+            searchBar.style.boxShadow = "0 0 10px rgba(139, 69, 19, 0.5)";
+        }
+    
+        function shrinkSearchBar() {
+            const searchBar = document.getElementById("searchInput");
+            searchBar.style.width = "150px";
+            searchBar.style.borderColor = "#ccc";
+            searchBar.style.boxShadow = "none";
+        }
+    
+        function filterBooks() {
+            const genre = document.getElementById("genreFilter").value;
+            const books = document.querySelectorAll(".pdf-item");
+    
+            books.forEach(book => {
+                const genres = book.dataset.genre.split(",");
+                if (genre === "all" || genres.includes(genre)) {
+                    book.style.display = "block";
+                } else {
+                    book.style.display = "none";
+                }
+            });
+        }
+    
+        function searchBooks() {
+            const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+            const books = document.querySelectorAll(".pdf-item");
+    
+            books.forEach(book => {
+                const title = book.dataset.title.toLowerCase();
+                book.style.display = title.includes(searchTerm) ? "block" : "none";
+            });
+        }
+    
+        function updateGenreFilter() {
+            const books = document.querySelectorAll(".pdf-item");
+            const genres = new Set();
+    
+            books.forEach(book => {
+                const bookGenres = book.dataset.genre.split(",");
+                bookGenres.forEach(genre => genres.add(genre.trim()));
+            });
+    
+            const genreFilter = document.getElementById("genreFilter");
+            genreFilter.innerHTML = '<option value="all">Todos</option>';
+    
+            genres.forEach(genre => {
+                const option = document.createElement("option");
+                option.value = genre;
+                option.textContent = genre.charAt(0).toUpperCase() + genre.slice(1);
+                genreFilter.appendChild(option);
+            });
+        }
+    
+        function openPDF(index) {
+            currentIndex = index; // Actualizamos el índice actual
+            const modal = document.getElementById("pdfModal");
+            const iframe = document.getElementById("pdfIframe");
+            iframe.src = pdfList[index].url;
+            modal.style.display = "flex";
+    
+            // Marcar como leído
+            pdfList[index].read = true;
+            saveReadStatus();
+            updateReadStatus();
+        }
+    
+        function closePDF() {
+            const modal = document.getElementById("pdfModal");
+            const iframe = document.getElementById("pdfIframe");
+            iframe.src = "";
+            modal.style.display = "none";
+        }
+    
+        function navigatePDF(direction) {
+            const newIndex = currentIndex + direction;
+            if (newIndex >= 0 && newIndex < pdfList.length) {
+                openPDF(newIndex);
+            }
+        }
+    
+        function saveReadStatus() {
+            const readStatus = pdfList.map(pdf => pdf.read);
+            localStorage.setItem("pdfReadStatus", JSON.stringify(readStatus));
+        }
+    
+        function loadReadStatus() {
+            const savedStatus = localStorage.getItem("pdfReadStatus");
+            if (savedStatus) {
+                const readStatus = JSON.parse(savedStatus);
+                pdfList.forEach((pdf, index) => {
+                    pdf.read = readStatus[index];
+                });
+            }
+            updateReadStatus();
+        }
+    
+        function updateReadStatus() {
+            pdfList.forEach((pdf, index) => {
+                const titleElement = document.getElementById(`pdf-title-${index}`);
+                if (pdf.read) {
+                    titleElement.style.color = "green"; // Cambiar color si está leído
+                } else {
+                    titleElement.style.color = ""; // Restaurar color predeterminado
+                }
+            });
+        }
+    
+        // Cargar estado de lectura al iniciar la página
+        loadReadStatus();
+    
+        // Actualizar el filtro de géneros al iniciar
+        updateGenreFilter();
+    </script>
+    
+</body>
+
+</html>
